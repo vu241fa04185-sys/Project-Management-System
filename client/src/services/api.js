@@ -72,7 +72,17 @@ api.interceptors.response.use(
     } else if (status === 403) {
       message = data?.message || 'Access denied: You do not have permission for this resource.';
     } else if (status === 404) {
-      message = data?.message || 'The requested resource was not found.';
+      if (
+        !data?.message &&
+        typeof window !== 'undefined' &&
+        window.location.hostname !== 'localhost' &&
+        window.location.hostname !== '127.0.0.1' &&
+        API_BASE_URL === '/api'
+      ) {
+        message = 'Backend API URL is not connected. Please set VITE_API_BASE_URL in your Vercel Project Settings and redeploy.';
+      } else {
+        message = data?.message || 'The requested resource was not found.';
+      }
     } else if (status === 409) {
       message = data?.message || 'A conflicting operation is already in progress.';
     } else if (status === 429) {

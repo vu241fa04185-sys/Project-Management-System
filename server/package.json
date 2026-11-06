@@ -26,7 +26,8 @@
     "test:step11": "node src/utils/testIntegration.js",
     "test:workflow": "node src/utils/testUploadToProgressWorkflow.js",
     "test:consistency": "node src/utils/testProgressConsistency.js",
-    "test:deployment": "node src/utils/testDeploymentConnection.js"
+    "test:deployment": "node src/utils/testDeploymentConnection.js",
+    "test:auth-integration": "node src/utils/testAuthIntegration.js"
   },
   "keywords": [
     "projectpulse",

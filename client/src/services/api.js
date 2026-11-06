@@ -11,7 +11,23 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Resolve API base URL prioritizing VITE_API_BASE_URL, falling back to VITE_API_URL or local '/api'
+const rawEnvUrl = (
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_URL ||
+  '/api'
+).trim();
+
+// Normalize URL: remove any trailing slashes
+let normalizedBaseUrl = rawEnvUrl.replace(/\/+$/, '');
+
+// If an absolute URL was provided (e.g., https://backend.onrender.com) and it does NOT already end in /api,
+// append /api so that endpoint paths (/auth/login, /projects) resolve to /api/auth/login, /api/projects
+if (/^https?:\/\//i.test(normalizedBaseUrl) && !normalizedBaseUrl.endsWith('/api')) {
+  normalizedBaseUrl = `${normalizedBaseUrl}/api`;
+}
+
+const API_BASE_URL = normalizedBaseUrl;
 
 const api = axios.create({
   baseURL: API_BASE_URL,

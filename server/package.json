@@ -25,7 +25,8 @@
     "test:integration": "node src/utils/testIntegration.js",
     "test:step11": "node src/utils/testIntegration.js",
     "test:workflow": "node src/utils/testUploadToProgressWorkflow.js",
-    "test:consistency": "node src/utils/testProgressConsistency.js"
+    "test:consistency": "node src/utils/testProgressConsistency.js",
+    "test:deployment": "node src/utils/testDeploymentConnection.js"
   },
   "keywords": [
     "projectpulse",
@@ -35,6 +36,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@babel/parser": "^8.1.0",
     "@babel/traverse": "^8.1.0",
